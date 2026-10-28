@@ -87,6 +87,8 @@ for (const item of items) console.log(item.status, item.outputUrl ?? item.error)
 
 Use the official Apify integration ("Run an Actor and get dataset" in n8n, "Run an Actor" + "Get Dataset Items" in Make, "Run Actor and Fetch Results" in Zapier), select `ent-e/image-converter-compressor`, paste an input from [`examples/`](examples/) and map each item's `outputUrl` into the next step. In n8n you can pass a URL from a previous node, e.g. `"url": "{{ $json.imageUrl }}"`.
 
+**Ready-made templates:** importable n8n workflows and Make blueprints for this Actor are in [ENT-E-Pro/automation-templates](https://github.com/ENT-E-Pro/automation-templates).
+
 ## Example inputs
 
 See [`examples/`](examples/):
