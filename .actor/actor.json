@@ -1,0 +1,13 @@
+{
+  "actorSpecification": 1,
+  "name": "image-converter-compressor",
+  "title": "Image Converter & Compressor for AI Agents",
+  "version": "0.1",
+  "buildTag": "latest",
+  "input": "./input_schema.json",
+  "dockerfile": "../Dockerfile",
+  "output": "./output_schema.json",
+  "storages": {
+    "dataset": "./dataset_schema.json"
+  }
+}

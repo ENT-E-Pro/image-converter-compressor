@@ -1,0 +1,68 @@
+{
+  "title": "Image Converter input",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "url": {
+      "title": "Image URL",
+      "type": "string",
+      "editor": "textfield",
+      "description": "Direct, publicly downloadable URL of ONE image (http/https). Input formats: JPEG, PNG, WebP, AVIF, GIF (first frame), TIFF, BMP, ICO and others Pillow reads. Max 50 MB and 100 megapixels. Example: https://download.samplelib.com/png/sample-boat-400x300.png",
+      "prefill": "https://download.samplelib.com/png/sample-boat-400x300.png"
+    },
+    "files": {
+      "title": "Batch",
+      "type": "array",
+      "editor": "json",
+      "description": "Optional batch. Array of objects: {\"url\": string (required), plus any of target, quality, maxWidth, maxHeight, maxBytes, stripMetadata to override the top-level value for that image}. Example: [{\"url\":\"https://example.com/a.png\",\"target\":\"avif\",\"maxWidth\":800},{\"url\":\"https://example.com/b.jpg\",\"maxBytes\":100000}]. Plain URL strings also accepted. Failed images return status=error and are not charged."
+    },
+    "target": {
+      "title": "Output format",
+      "type": "string",
+      "editor": "select",
+      "default": "webp",
+      "enum": [
+        "webp",
+        "avif",
+        "jpeg",
+        "png",
+        "gif",
+        "tiff"
+      ],
+      "description": "Output format. Default: webp. webp = best general web choice; avif = smallest files, slower to encode; jpeg = universal (transparency is flattened onto white); png = lossless, keeps transparency; gif = first frame only; tiff = archival/print."
+    },
+    "quality": {
+      "title": "Quality (1-100)",
+      "type": "integer",
+      "default": 80,
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Encoder quality 1-100 for jpeg/webp/avif (ignored for png/gif/tiff). Default 80. ~75-85 is visually lossless for photos; lower = smaller files. If maxBytes is set, this is the starting/maximum quality."
+    },
+    "maxWidth": {
+      "title": "Max width (px)",
+      "type": "integer",
+      "minimum": 1,
+      "description": "Optional maximum output width in pixels, e.g. 1200. Image is downscaled proportionally to fit (aspect ratio kept, never upscaled). Combine with maxHeight to fit inside a box."
+    },
+    "maxHeight": {
+      "title": "Max height (px)",
+      "type": "integer",
+      "minimum": 1,
+      "description": "Optional maximum output height in pixels, e.g. 800. Downscales proportionally (never upscales)."
+    },
+    "maxBytes": {
+      "title": "Target max file size (bytes)",
+      "type": "integer",
+      "minimum": 1000,
+      "description": "Optional target maximum output size in BYTES (e.g. 150000 = ~150 KB). Quality is automatically lowered (binary search) until the file fits. Only for jpeg/webp/avif. If it cannot fit even at very low quality, the item errors (not charged) - add maxWidth to shrink dimensions too."
+    },
+    "stripMetadata": {
+      "title": "Strip EXIF/GPS metadata",
+      "type": "boolean",
+      "default": true,
+      "description": "Default true: removes EXIF, GPS location, camera and other metadata from the output (privacy-safe for user uploads). Orientation is applied to pixels first so images stay upright. Set false to keep EXIF (jpeg/webp)."
+    }
+  },
+  "description": "Convert, resize and compress public image URLs. Pass `url` for one image or `files` for a batch; top-level options apply to all, per-item fields override. Outputs are download URLs in the dataset."
+}

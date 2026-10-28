@@ -1,0 +1,14 @@
+{
+  "events": {
+    "apify-actor-start": {
+      "price": 5e-05
+    },
+    "image-converted": {
+      "title": "Image converted",
+      "isPrimary": true,
+      "price": 0.001,
+      "description": "One successfully converted image; failures free."
+    }
+  },
+  "passPlatformUsageToUser": false
+}

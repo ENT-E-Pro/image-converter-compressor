@@ -1,0 +1,10 @@
+{
+  "target": "webp",
+  "quality": 75,
+  "maxWidth": 1600,
+  "files": [
+    { "url": "https://download.samplelib.com/png/sample-boat-400x300.png" },
+    { "url": "https://download.samplelib.com/png/sample-boat-400x300.png", "target": "avif", "maxWidth": 200 },
+    { "url": "https://download.samplelib.com/png/sample-boat-400x300.png", "target": "jpeg", "quality": 60, "maxBytes": 15000 }
+  ]
+}
